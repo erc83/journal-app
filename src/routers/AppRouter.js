@@ -17,8 +17,10 @@ import Error from '../components/error/Error'
 const AppRouter = () => {
   return (
     <BrowserRouter>
-        <div>
+        <div className="app__router__main">
+            <div className='auth__box-container'>
             <Routes> 
+
 
                 <Route index element={ <JournalScreen />  } />
 
@@ -38,6 +40,7 @@ const AppRouter = () => {
                 <Route exact path="*" element={ <Navigate replace to="/error" /> } />
 
             </Routes>
+          </div>
         </div>
     </BrowserRouter>
   )
