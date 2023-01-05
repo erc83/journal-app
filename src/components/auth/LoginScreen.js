@@ -53,13 +53,7 @@ const LoginScreen = () => {
           Create new account
         </Link>
 
-
-
       </form>
-
-
-
-    
     </>
   )
 }
