@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 const RegisterScreen = () => {
   return (
-    <>
+    <div className="app__router__main">
+
+    <div className='auth__box-container'>
       <h3 className="auth__title">Register</h3>
 
       <form>
@@ -56,7 +58,8 @@ const RegisterScreen = () => {
         </Link>
 
       </form>
-    </>
+    </div>
+    </div>
   )
 }
 

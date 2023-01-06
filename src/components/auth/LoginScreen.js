@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 
 const LoginScreen = () => {
   return (
-    <>
+    <div className="app__router__main">
+
+      <div className='auth__box-container'> m
       <h3 className="auth__title">Login</h3>
 
       <form>
@@ -14,20 +16,20 @@ const LoginScreen = () => {
           placeholder="Email"
           name="email"
           autoComplete='off'
-        />
+          />
 
         <input
           className="auth__input" 
           type="password"
           placeholder="Password"
           name="password"
-        />
+          />
 
         <button
           type="submit"
           className="btn btn-primary btn-block"
           /* disabled={ true } */
-        >
+          >
           Login
         </button>
 
@@ -49,12 +51,13 @@ const LoginScreen = () => {
         <Link
           to="/auth/register"
           className='link'
-        >
+          >
           Create new account
         </Link>
 
       </form>
-    </>
+            </div>
+    </div>
   )
 }
 

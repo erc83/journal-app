@@ -17,8 +17,7 @@ import Error from '../components/error/Error'
 const AppRouter = () => {
   return (
     <BrowserRouter>
-        <div className="app__router__main">
-            <div className='auth__box-container'>
+        <div>
             <Routes> 
 
 
@@ -41,7 +40,6 @@ const AppRouter = () => {
 
             </Routes>
           </div>
-        </div>
     </BrowserRouter>
   )
 }
