@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/apuntes
+/17_apuntes
+/19_intro_redux_autenticacion_firebase
