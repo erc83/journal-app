@@ -23,11 +23,9 @@ const LoginScreen = () => {
     dispatch( startLoginEmailPassword( email, password ) )
   }
 
-
   const handleGoogleLogin = () => {
     dispatch( startGoogleLogin() );
   }
-
 
   return (
     <div className="app__router__main">
