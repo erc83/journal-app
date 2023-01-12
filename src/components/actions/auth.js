@@ -21,10 +21,6 @@ export const startLoginEmailPassword = () => {
     }
 }
 
-// var provider = new firebase.auth.GoogleAuthProvider();    version 8
-// const provider = new GoogleAuthProvider();
-
-
 export const startGoogleLogin = () => {
     return ( dispatch ) => {      // este es el cb
         signInWithPopup( auth, googleAuthProvider ) // esto retorna una promesa
@@ -45,7 +41,7 @@ export const login = ( uid, displayName ) => ({
     type: types.login,
     payload: {
         uid, 
-            displayName
+        displayName
     }
 })
 /*

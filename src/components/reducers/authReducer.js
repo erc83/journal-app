@@ -14,13 +14,12 @@ export const authReducer = ( state = initialState , action ) => {   // state ini
         case types.login:
                 return {
                     uid: action.payload.uid,
-                    name: action.payload.displayName,
-                
+                    name: action.payload.displayName,                
                 }
             
         case types.logout:
                 return { }
-    
+  
         default:
             return state;
     }
