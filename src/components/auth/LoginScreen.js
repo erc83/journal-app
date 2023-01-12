@@ -1,14 +1,39 @@
 import React from 'react'
+import { useDispatch } from "react-redux";
+
 import { Link } from 'react-router-dom'
+import { useForm } from '../../hooks/useForm'
+import { startGoogleLogin, startLoginEmailPassword } from '../actions/auth';
 
 const LoginScreen = () => {
+
+  const dispatch = useDispatch();
+
+  const [ values, handleInputChange ] = useForm({
+    email: "eric@gmail.com",
+    password: "123456"
+  });
+
+  // desestructurando el objeto del hook del formulario
+  const { email, password } = values;
+  
+  const handleLogin = (e) => {
+    e.preventDefault()
+    // console.log(email, password)
+    dispatch( startLoginEmailPassword( email, password ) )
+  }
+
+  const handleGoogleLogin = () => {
+    dispatch( startGoogleLogin() );
+  }
+
   return (
     <div className="app__router__main">
 
-      <div className='auth__box-container'> m
+      <div className='auth__box-container'>
       <h3 className="auth__title">Login</h3>
 
-      <form>
+      <form onSubmit={ handleLogin } >
 
         <input
           className="auth__input" 
@@ -16,6 +41,8 @@ const LoginScreen = () => {
           placeholder="Email"
           name="email"
           autoComplete='off'
+          value={ email }
+          onChange={ handleInputChange }
           />
 
         <input
@@ -23,6 +50,8 @@ const LoginScreen = () => {
           type="password"
           placeholder="Password"
           name="password"
+          value={ password }
+          onChange={ handleInputChange }
           />
 
         <button
@@ -38,7 +67,10 @@ const LoginScreen = () => {
           
           <hr />
 
-          <div className="google-btn">
+          <div 
+            className="google-btn"
+            onClick={ handleGoogleLogin }
+          >
               <div className="google-icon-wrapper">
                   <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
               </div>
