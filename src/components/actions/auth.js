@@ -2,7 +2,7 @@ import { googleAuthProvider, auth } from "../../firebase/firebaseConfig";
 import {
     createUserWithEmailAndPassword,
 //    createUserWithEmailAndPassword,
-//    signInWithEmailAndPassword,
+    signInWithEmailAndPassword,
 //    signOut,
 //    onAuthStateChanged,
 //    GoogleAuthProvider,
@@ -12,14 +12,26 @@ import {
 } from "firebase/auth";
 
 import { types } from "../types/types"
+import { finishLoading, startLoading } from "./ui";
 
 
-export const startLoginEmailPassword = () => {
+export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
-        setTimeout(() => {
-            dispatch( login(123, "Pedro") );
-        }, 3500)
-        
+
+        dispatch( startLoading() );  
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then(({ user }) => {
+                dispatch( login(user.uid, user.displayName));
+
+                dispatch( finishLoading() );
+                
+            })
+            .catch((err) => {
+                alert(err.message)
+                dispatch( finishLoading() );
+            })
+
     }
 }
 
