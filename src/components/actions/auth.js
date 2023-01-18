@@ -1,11 +1,13 @@
 import { googleAuthProvider, auth } from "../../firebase/firebaseConfig";
 import {
+    createUserWithEmailAndPassword,
 //    createUserWithEmailAndPassword,
 //    signInWithEmailAndPassword,
 //    signOut,
 //    onAuthStateChanged,
 //    GoogleAuthProvider,
 //    sendPasswordResetEmail,
+    updateProfile,
     signInWithPopup,
 } from "firebase/auth";
 
@@ -21,6 +23,8 @@ export const startLoginEmailPassword = () => {
     }
 }
 
+
+
 export const startGoogleLogin = () => {
     return ( dispatch ) => {      // este es el cb
         signInWithPopup( auth, googleAuthProvider ) // esto retorna una promesa
@@ -32,8 +36,8 @@ export const startGoogleLogin = () => {
                     login( user.uid, user.displayName )
                 )
             })
+        }
     }
-}
 
 
 // otra forma de usar mas simple
@@ -55,3 +59,25 @@ export const login = ( uid, displayName ) => {
     }
 }
 */
+
+export const startRegisterWithEmailPasswordName = ( email, password, name ) => {
+    
+    return ( dispatch ) => {
+
+         createUserWithEmailAndPassword(auth, email, password)
+            .then( async ( {user} ) => {
+                
+                await updateProfile(auth.currentUser, {
+                    displayName: name
+                })
+                // console.log(user)
+                dispatch(
+                    login( user.uid, user.displayName )
+                )
+            })
+            .catch( (err) => {
+                alert(err.message)
+            })
+
+    }
+}
