@@ -3,7 +3,7 @@ import {
     createUserWithEmailAndPassword,
 //    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-//    signOut,
+    signOut,
 //    onAuthStateChanged,
 //    GoogleAuthProvider,
 //    sendPasswordResetEmail,
@@ -93,3 +93,16 @@ export const startRegisterWithEmailPasswordName = ( email, password, name ) => {
 
     }
 }
+
+
+export const startLogout = () => {
+    return async (dispatch) => {
+        await signOut( auth );
+        
+        dispatch( logout() );
+    }
+}
+
+export const logout = () => ({
+    type: types.logout
+})

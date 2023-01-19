@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import {
     BrowserRouter,    // BrowserRouter as Router
@@ -21,6 +21,9 @@ import { login } from '../components/actions/auth';
 const AppRouter = () => {
 
   const dispatch = useDispatch();
+  const [checking, setChecking] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   useEffect(() => {
     
@@ -28,13 +31,21 @@ const AppRouter = () => {
         // console.log(user)
       if( user?.uid ) {   // ? si el objeto user tiene algo pregunta por la propiedad uid
         dispatch( login( user.uid, user.displayName ) );     // si necesito el email se puede extraer desde aquí
+        setIsLoggedIn(true);
+
+      }else{
+        setIsLoggedIn(false);
       }
+
+      setChecking(false);
 
     })
 
-  }, [ dispatch ])
+  }, [ dispatch, setChecking, setIsLoggedIn ])
   
-
+  if(checking) {
+    return(<h1>Espere....</h1>)
+  }
 
   return (
     <BrowserRouter>
