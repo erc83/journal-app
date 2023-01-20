@@ -7,15 +7,17 @@ import {
     Navigate
 } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
+
 import { auth } from '../firebase/firebaseConfig';
+import { login } from '../components/actions/auth';
 
 
 import LoginScreen from '../components/auth/LoginScreen';
 import RegisterScreen from '../components/auth/RegisterScreen';
 import JournalScreen from '../components/journal/JournalScreen';
 import AuthRouter from './AuthRouter';
+import DashBoardRouter from './DashboardRouter';
 import Error from '../components/error/Error'
-import { login } from '../components/actions/auth';
 
 
 const AppRouter = () => {
@@ -52,17 +54,14 @@ const AppRouter = () => {
         <div>
             <Routes> 
 
-
-                <Route index element={ <JournalScreen />  } />
-
-                <Route 
-                    path="/auth"
-                    element={ <AuthRouter /> }
-                />
-                
-
-                <Route exact path="/auth/login" element={ <LoginScreen /> } />
-                <Route exact path="/auth/register" element={ <RegisterScreen /> } />
+                <Route path="/" element={ <AuthRouter  isAllowed={ isLoggedIn } redirectTo="/auth/login" />  }>
+                  <Route path="/" element={ <JournalScreen />  } />
+                </Route>
+                   
+                 <Route path="/auth" element={ <DashBoardRouter  isAllowed={ isLoggedIn } redirectTo="/" />  }>
+                  <Route exact path="/auth/login" element={ <LoginScreen  /> } />
+                  <Route exact path="/auth/register" element={ <RegisterScreen /> } />
+                </Route>
 
               {/*   <Route exact path="/" element={ <JournalScreen /> } /> */}
                 

@@ -1,7 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
-import { Link } from 'react-router-dom'
+import { Link, 
+  //useNavigate 
+} from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
 import { startGoogleLogin, startLoginEmailPassword } from '../actions/auth';
 
@@ -18,11 +20,13 @@ const LoginScreen = () => {
 
   // desestructurando el objeto del hook del formulario
   const { email, password } = values;
-  
-  const handleLogin = (e) => {
+ // const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
     e.preventDefault()
     // console.log(email, password)
-    dispatch( startLoginEmailPassword( email, password ) )
+    dispatch(startLoginEmailPassword( email, password ) )
+  
   }
 
   const handleGoogleLogin = () => {
