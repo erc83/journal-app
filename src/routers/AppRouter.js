@@ -10,8 +10,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import { auth } from '../firebase/firebaseConfig';
 import { login } from '../components/actions/auth';
-import { loadNotes } from '../components/helpers/loadNotes';
-import { setNotes } from '../components/actions/notes';
+import { startLoadingNotes } from '../components/actions/notes';
 
 import LoginScreen from '../components/auth/LoginScreen';
 import RegisterScreen from '../components/auth/RegisterScreen';
@@ -36,8 +35,8 @@ const AppRouter = () => {
         dispatch( login( user.uid, user.displayName ) );     // si necesito el email se puede extraer desde aquí
         setIsLoggedIn(true);
 
-        const notes = await loadNotes( user.uid );
-        dispatch( setNotes( notes ) ); 
+        // const notes = await loadNotes( user.uid );
+        dispatch( startLoadingNotes( user.uid ) ); 
 
       }else{
         setIsLoggedIn(false);
