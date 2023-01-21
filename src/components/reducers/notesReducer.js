@@ -34,7 +34,12 @@ export const notesReducer = (state= initialState , action) => {
                 active: { ...action.payload }
             }
         
-    
+        case types.notesLoad:
+            // console.log(action.payload)  // estamos recibiendo una promesa
+            return {
+                ...state, notes: [ ...action.payload ]
+            }    
+
         default:
             return state;;
     }

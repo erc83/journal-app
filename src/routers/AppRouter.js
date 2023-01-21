@@ -10,7 +10,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import { auth } from '../firebase/firebaseConfig';
 import { login } from '../components/actions/auth';
-
+import { loadNotes } from '../components/helpers/loadNotes';
+import { setNotes } from '../components/actions/notes';
 
 import LoginScreen from '../components/auth/LoginScreen';
 import RegisterScreen from '../components/auth/RegisterScreen';
@@ -29,11 +30,14 @@ const AppRouter = () => {
 
   useEffect(() => {
     
-    onAuthStateChanged(auth, (user) => {   // si no estoy autenticado regresara un null
+    onAuthStateChanged(auth, async (user) => {   // si no estoy autenticado regresara un null
         // console.log(user)
       if( user?.uid ) {   // ? si el objeto user tiene algo pregunta por la propiedad uid
         dispatch( login( user.uid, user.displayName ) );     // si necesito el email se puede extraer desde aquí
         setIsLoggedIn(true);
+
+        const notes = await loadNotes( user.uid );
+        dispatch( setNotes( notes ) ); 
 
       }else{
         setIsLoggedIn(false);
