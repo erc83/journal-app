@@ -1,8 +1,7 @@
 import { db } from '../../firebase/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore'
 
-
-
+import { types } from '../types/types'
 
 // para grabar necesito el uid del usuario
 export const startNewNote = () => {
@@ -10,7 +9,7 @@ export const startNewNote = () => {
         
         // const state = getState();
         const { uid } = getState().auth;    
-        console.log( uid );
+        //console.log( uid );
     
         const newNote = {
             title: '',
@@ -19,7 +18,15 @@ export const startNewNote = () => {
         }
 
         const doc = await addDoc(collection(db, `${ uid }/journal/notes`), newNote )     
-        console.log(doc)
-
+        // console.log(doc)
+        dispatch( activeNote( doc.id, newNote ))  // hacemos el dispatch al reducer
     }
 }
+
+export const activeNote = ( id, note ) => ({      // return {}
+    type: types.notesActive,
+    payload: {
+        id,
+        ...note
+    }
+})
