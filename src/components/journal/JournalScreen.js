@@ -21,11 +21,9 @@ const JournalScreen = () => {
       <main>
 
         {
-          ( active )  // si tiene algo muestra
+          ( active )  // si tiene algo muestra NoteScreen
             ? ( <NoteScreen /> )
             : ( <NothingSelected /> )
-
-
         }
 
       </main>
