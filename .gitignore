@@ -25,3 +25,4 @@ yarn-error.log*
 /17_apuntes
 /19_intro_redux_autenticacion_firebase
 .env
+/20_crud_firestore_subida_archivos
