@@ -27,7 +27,7 @@ export const startNewNote = () => {
 export const activeNote = ( id, note ) => ({      // return {}
     type: types.notesActive,
     payload: {
-        id,
+        id, 
         ...note
     }
 })
