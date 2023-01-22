@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useForm } from '../../hooks/useForm';
 
@@ -7,15 +7,20 @@ import NotesAppBar from './NotesAppBar'
 
 const NoteScreen = () => {
 
-  //const state = useSelector( state => state );
-  const { active: note } = useSelector( state => state.notes );   // aqui renombramos la nota activa
-  // console.log( note , "nota activa")
-
-  const [values, handleInputChange ] = useForm( note);  // recibe el argumento del formulario y se podrian mandar la note
-
-  // console.log( values, "desde el formulario" )
+  const { active: note } = useSelector( state => state.notes ); 
+  const [values, handleInputChange, reset ] = useForm( note);
   const { body , title } = values
 
+  const activeId = useRef( note.id ); 
+
+  useEffect(() => {
+    if(note.id !== activeId.current){
+      reset( note )
+      activeId.current = note.id
+    }
+    
+  }, [ note, reset ])
+  
   return (
     <div className='notes__main-content'>
   
@@ -51,7 +56,7 @@ const NoteScreen = () => {
               </div> 
             )
           }
-          
+
         </div>
     </div>
   )
