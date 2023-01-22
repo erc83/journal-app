@@ -29,7 +29,7 @@ const AppRouter = () => {
 
   useEffect(() => {
     
-    onAuthStateChanged(auth, async (user) => {   // si no estoy autenticado regresara un null
+    onAuthStateChanged(auth, (user) => {   
         // console.log(user)
       if( user?.uid ) {   // ? si el objeto user tiene algo pregunta por la propiedad uid
         dispatch( login( user.uid, user.displayName ) );     // si necesito el email se puede extraer desde aquí

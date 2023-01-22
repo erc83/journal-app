@@ -15,7 +15,7 @@ export const loadNotes = async (uid) => {
             id: snapHijo.id, ...snapHijo.data()
         })
     })
-    console.log(notes)
+    // console.log(notes)
     return notes; 
 
 }
