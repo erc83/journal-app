@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 
 import { db } from '../../firebase/firebaseConfig';
-import { collection, addDoc, updateDoc, doc } from 'firebase/firestore'
+import { collection, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore'
 import { loadNotes } from "../helpers/loadNotes";
 
 import { types } from '../types/types'
@@ -103,3 +103,24 @@ export const startUploading = ( file ) => {
         Swal.close()
     }
 }
+
+
+export const startDeleting  = ( id ) => {
+    return async( dispatch, getState ) => {                   // gracias a thunk tenemos el dispatch 
+
+        const uid = getState().auth.uid;
+    
+        //await db.doc(`${ uid }/journal/notes/${ id }`).delete(); // version firebase 8
+
+        await deleteDoc(doc( db, `${ uid }/journal/notes`, id ) )   // con esto deberiamos eliminarlo de la base de datos
+
+
+        dispatch( deleteNote( id ) ); 
+        
+    }
+}
+
+export const deleteNote = (id) => ({    // necesitamos implementar el deleteNote para que el reducer sepa que hacer hay
+    type: types.notesDelete,
+    payload: id
+})

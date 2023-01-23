@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from '../../hooks/useForm';
-import { activeNote } from '../actions/notes';
+import { activeNote, startDeleting } from '../actions/notes';
 
 
 import NotesAppBar from './NotesAppBar'
@@ -12,7 +12,7 @@ const NoteScreen = () => {
 
   const { active: note } = useSelector( state => state.notes ); 
   const [values, handleInputChange, reset ] = useForm( note);
-  const { body , title } = values
+  const { body , title , id } = values
 
   const activeId = useRef( note.id ); 
 
@@ -31,6 +31,16 @@ const NoteScreen = () => {
     dispatch( activeNote( values.id, {...values } ) ) 
 
   }, [ values, dispatch  ])
+
+
+  // fn para borrar la nota seleccionada
+  const handleDelete = () => {
+    // hay que hacer un dispatch para que haga la tarea sincrona de borrar
+    // console.log(id)
+    
+    dispatch( startDeleting( id ) );
+    
+  }
   
 
   
@@ -73,6 +83,14 @@ const NoteScreen = () => {
           }
 
         </div>
+
+        <button
+          className='btn btn-danger'
+          onClick={ handleDelete }
+        >
+          Delete
+        </button>
+
     </div>
   )
 }
