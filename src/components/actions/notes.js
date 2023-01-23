@@ -5,6 +5,7 @@ import { collection, addDoc, updateDoc, doc } from 'firebase/firestore'
 import { loadNotes } from "../helpers/loadNotes";
 
 import { types } from '../types/types'
+import { fileUpload } from '../helpers/fileUpload';
 
 // para grabar necesito el uid del usuario
 export const startNewNote = () => {
@@ -78,3 +79,20 @@ export const refreshNote = ( id, note ) => ({
         }
     }
 })
+
+
+
+export const startUploading = ( file ) => {
+    return async( dispatch, getState ) => {
+        // const activeNote = getState().notes;
+        const { active: activeNote } = getState().notes;   // para cambiarle el nombre a active por activeNote
+
+        // console.log(file);  
+        // console.log(activeNote)   //aqui es donde queremos actualizar el URL
+        // se crea helper para la subida del archivo
+        const fileUrl = await fileUpload( file );
+
+        console.log( fileUrl )
+
+    }
+}
