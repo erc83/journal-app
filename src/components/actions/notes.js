@@ -21,6 +21,8 @@ export const startNewNote = () => {
 
         const doc = await addDoc(collection(db, `${ uid }/journal/notes`), newNote )     
         dispatch( activeNote( doc.id, newNote ))  // hacemos el dispatch al reducer
+
+        dispatch( addNewNote(doc.id, newNote ))     // para cargar nota panel lateral
     }
 }
 
@@ -28,6 +30,15 @@ export const activeNote = ( id, note ) => ({      // return {}
     type: types.notesActive,
     payload: {
         id, 
+        ...note
+    }
+})
+
+
+export const addNewNote = ( id, note ) => ({
+    type: types.notesAddNew,
+    payload: {
+        id,
         ...note
     }
 })
@@ -124,3 +135,11 @@ export const deleteNote = (id) => ({    // necesitamos implementar el deleteNote
     type: types.notesDelete,
     payload: id
 })
+
+
+//
+
+export const noteLogout = () => ({
+    type: types.notesLogoutCleaning
+})
+
