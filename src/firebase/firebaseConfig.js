@@ -5,6 +5,7 @@ import { getAuth } from 'firebase/auth'
 
 import { GoogleAuthProvider } from "firebase/auth";
 
+// configurar variables de entorno que estan definidas en archivo .env ejemplo de como tiene que quedar revisar el archivo .env.example
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_APIKEY,
     authDomain: process.env.REACT_APP_AUTHDOMAIN,
